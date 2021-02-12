@@ -1,0 +1,19 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+
+.todo-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.todo {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #020202;
+  border-radius: 35px;
+  overflow: hidden;
+}
+
+.todo--checked {
+  background-color: sandybrown;
+}

@@ -16,7 +16,6 @@ function deleteToDo(event) {
   while (toDoList.hasChildNodes()) {
     toDoList.removeChild(toDoList.firstChild);
   }
-  console.log(newToDos);
   newToDos.forEach((toDo) => {
     makeToDo(toDo.text);
   });
@@ -24,15 +23,17 @@ function deleteToDo(event) {
 }
 
 function checkToDo() {
-  const li = this.parentElement;
+  const li = this;
   const id = li.id;
   const lastCN = li.classList[li.classList.length - 1];
   if (lastCN !== CHECKED_CN) {
     li.classList.add(CHECKED_CN);
     toDos[id - 1].checked = true;
+    toDos[id - 1].sum += 1;
   } else {
     li.classList.remove(CHECKED_CN);
     toDos[id - 1].checked = false;
+    toDos[id - 1].sum -= 1;
   }
   saveToDos();
 }
@@ -41,34 +42,35 @@ function saveToDos() {
   localStorage.setItem('toDos', JSON.stringify(toDos));
 }
 
-function makeToDo(text, checked) {
+function makeToDo(text, checked, sum) {
   const li = document.createElement('li');
   const span = document.createElement('span');
-  const checkBtn = document.createElement('input');
   const delBtn = document.createElement('button');
   const newId = toDos.length + 1;
   li.id = newId;
   li.classList.add('todo');
   span.innerText = text;
-  checkBtn.type = 'checkbox';
   if (checked === true) {
-    checkBtn.setAttribute('checked', 'checked');
+    li.setAttribute('checked', 'checked');
     li.classList.add(CHECKED_CN);
   }
-  checkBtn.addEventListener('click', checkToDo);
+  li.addEventListener('click', checkToDo);
   delBtn.innerText = 'X';
   delBtn.addEventListener('click', deleteToDo);
   li.appendChild(span);
-  li.appendChild(checkBtn);
   li.appendChild(delBtn);
   toDoList.appendChild(li);
   if (checked === undefined) {
     checked = false;
   }
+  if (sum === undefined) {
+    sum = 0;
+  }
   const toDoObj = {
     id: newId,
     text: text,
     checked: checked,
+    sum: sum,
   };
   toDos.push(toDoObj);
   saveToDos();
@@ -85,7 +87,7 @@ function loadLSToDos() {
   const loadedToDos = JSON.parse(localStorage.getItem('toDos'));
   if (loadedToDos !== null) {
     loadedToDos.forEach((toDo) => {
-      makeToDo(toDo.text, toDo.checked);
+      makeToDo(toDo.text, toDo.checked, toDo.sum);
     });
   }
 }
