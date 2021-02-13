@@ -25,6 +25,7 @@ body {
 .quote--text {
   font-weight: 500;
   font-size: 1rem;
+  line-height: 1.4rem;
 }
 
 .quote--speaker {
@@ -46,6 +47,10 @@ body {
   border: 2px solid #020202;
   border-radius: 35px;
   overflow: hidden;
+  background-color: aliceblue;
+}
+.todo:hover {
+  cursor: pointer;
 }
 
 .todo--text {
@@ -58,4 +63,8 @@ body {
 
 .todo--checked {
   background-color: sandybrown;
+}
+
+.sum-plant {
+  width: 100px;
 }

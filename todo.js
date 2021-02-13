@@ -1,9 +1,10 @@
 const toDoForm = document.querySelector('.js-toDoForm'),
   toDoInput = toDoForm.querySelector('input'),
-  toDoList = document.querySelector('.js-toDoList');
+  toDoList = document.querySelector('.js-toDoList'),
+  sumPlant = document.querySelector('.sum-plant');
 
 let toDos = [];
-
+let toDoSum = 0;
 const CHECKED_CN = 'todo--checked';
 
 function deleteToDo(event) {
@@ -36,6 +37,7 @@ function checkToDo() {
     toDos[id - 1].sum -= 1;
   }
   saveToDos();
+  paintSum();
 }
 
 function saveToDos() {
@@ -94,9 +96,22 @@ function loadLSToDos() {
   }
 }
 
+function paintSum(){
+  toDoSum = 0;
+  toDos.forEach(i => 
+    toDoSum += i.sum
+  );
+  if (toDoSum < 4) {
+    sumPlant.setAttribute('src',`img/plant${toDoSum + 1}.png`);
+  } else {
+    sumPlant.setAttribute('src','img/plant4.png');
+  } 
+};
+
 function init() {
   toDoForm.addEventListener('submit', handleSubmit);
   loadLSToDos();
+  paintSum();
 }
 
 init();
