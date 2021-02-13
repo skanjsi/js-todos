@@ -21,6 +21,7 @@ function deleteToDo(event) {
     makeToDo(toDo.text);
   });
   saveToDos();
+  paintSum();
 }
 
 function checkToDo() {
@@ -59,7 +60,7 @@ function makeToDo(text, checked, sum) {
     li.classList.add(CHECKED_CN);
   }
   li.addEventListener('click', checkToDo);
-  delBtn.innerText = 'X';
+  delBtn.innerText = '⨉';
   delBtn.addEventListener('click', deleteToDo);
   li.appendChild(span);
   li.appendChild(delBtn);
