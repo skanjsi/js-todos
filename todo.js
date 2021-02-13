@@ -49,6 +49,8 @@ function makeToDo(text, checked, sum) {
   const newId = toDos.length + 1;
   li.id = newId;
   li.classList.add('todo');
+  span.classList.add('todo--text');
+  delBtn.classList.add('todo--del');
   span.innerText = text;
   if (checked === true) {
     li.setAttribute('checked', 'checked');

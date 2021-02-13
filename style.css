@@ -1,5 +1,38 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
 
+body {
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #020202;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  text-align: center;
+}
+
+.quote--text {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.quote--speaker {
+  font-weight: 300;
+  font-size: 0.8rem;
+  margin-top: 0.8rem;
+}
+
 .todo-list {
   display: flex;
   flex-wrap: wrap;
@@ -9,9 +42,18 @@
   height: 100px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   border: 2px solid #020202;
   border-radius: 35px;
   overflow: hidden;
+}
+
+.todo--text {
+  text-align: center;
+}
+
+.todo--del {
+  position: absolute;
 }
 
 .todo--checked {
