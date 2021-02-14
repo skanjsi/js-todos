@@ -18,7 +18,7 @@ function deleteToDo(event) {
     toDoList.removeChild(toDoList.firstChild);
   }
   newToDos.forEach((toDo) => {
-    makeToDo(toDo.text, toDo.checked, toDo.sum);
+    makeToDo(toDo.text, toDo.checked, toDo.sum, toDo.createdAt);
   });
   saveToDos();
   paintSum();
@@ -46,7 +46,7 @@ function saveToDos() {
   localStorage.setItem('toDos', JSON.stringify(toDos));
 }
 
-function makeToDo(text, checked, sum) {
+function makeToDo(text, checked, sum, createdAt) {
   const li = document.createElement('li');
   const span = document.createElement('span');
   const delBtn = document.createElement('button');
@@ -66,6 +66,9 @@ function makeToDo(text, checked, sum) {
   if (sum === undefined) {
     sum = 0;
   }
+  if (createdAt === undefined){
+    createdAt = new Date();
+  }
   span.addEventListener('click', checkToDo);
   delBtn.innerText = '⨉';
   delBtn.addEventListener('click', deleteToDo);
@@ -77,6 +80,7 @@ function makeToDo(text, checked, sum) {
     text: text,
     checked: checked,
     sum: sum,
+    createdAt: createdAt,
   };
   toDos.push(toDoObj);
   saveToDos();
@@ -93,7 +97,7 @@ function loadLSToDos() {
   const loadedToDos = JSON.parse(localStorage.getItem('toDos'));
   if (loadedToDos !== null) {
     loadedToDos.forEach((toDo) => {
-      makeToDo(toDo.text, toDo.checked, toDo.sum);
+      makeToDo(toDo.text, toDo.checked, toDo.sum, toDo.createdAt);
     });
   }
 }
