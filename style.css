@@ -48,8 +48,10 @@ body {
 }
 
 .todo-list {
-  display: flex;
-  flex-wrap: wrap;
+  width: 80vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 11.4rem);
+  justify-content: center;
 }
 .todo--text {
   width: 8rem;
