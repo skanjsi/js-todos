@@ -48,7 +48,7 @@ body {
 }
 
 .todo-list {
-  width: 80vw;
+  width: 90vw;
   display: grid;
   grid-template-columns: repeat(auto-fit, 11.4rem);
   justify-content: center;
