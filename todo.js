@@ -18,22 +18,23 @@ function deleteToDo(event) {
     toDoList.removeChild(toDoList.firstChild);
   }
   newToDos.forEach((toDo) => {
-    makeToDo(toDo.text);
+    makeToDo(toDo.text, toDo.checked, toDo.sum);
   });
   saveToDos();
   paintSum();
 }
 
 function checkToDo() {
-  const li = this;
+  const span = this;
+  const li = span.parentElement;
   const id = li.id;
-  const lastCN = li.classList[li.classList.length - 1];
+  const lastCN = span.classList[span.classList.length - 1];
   if (lastCN !== CHECKED_CN) {
-    li.classList.add(CHECKED_CN);
+    span.classList.add(CHECKED_CN);
     toDos[id - 1].checked = true;
     toDos[id - 1].sum += 1;
   } else {
-    li.classList.remove(CHECKED_CN);
+    span.classList.remove(CHECKED_CN);
     toDos[id - 1].checked = false;
     toDos[id - 1].sum -= 1;
   }
@@ -57,20 +58,20 @@ function makeToDo(text, checked, sum) {
   span.innerText = text;
   if (checked === true) {
     li.setAttribute('checked', 'checked');
-    li.classList.add(CHECKED_CN);
+    span.classList.add(CHECKED_CN);
   }
-  li.addEventListener('click', checkToDo);
-  delBtn.innerText = '⨉';
-  delBtn.addEventListener('click', deleteToDo);
-  li.appendChild(span);
-  li.appendChild(delBtn);
-  toDoList.appendChild(li);
   if (checked === undefined) {
     checked = false;
   }
   if (sum === undefined) {
     sum = 0;
   }
+  span.addEventListener('click', checkToDo);
+  delBtn.innerText = '⨉';
+  delBtn.addEventListener('click', deleteToDo);
+  li.appendChild(span);
+  li.appendChild(delBtn);
+  toDoList.appendChild(li);
   const toDoObj = {
     id: newId,
     text: text,
